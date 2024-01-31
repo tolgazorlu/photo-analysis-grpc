@@ -1,49 +1,52 @@
 syntax = "proto3";
 
-package ImageManagement;
+package PhotoManagament;
 
 option go_package = "github.com/tolgazorlu/photo-analysis/proto";
 
-message Image {
-  string id = 1;
-  bytes data = 2;
+
+message UploadImageRequest {
+  bytes image = 1;
 }
 
-message ImageResponse {
-  string id = 1;
-  bool success = 2;
+message UploadImageResponse {
+  string image_id = 1;
 }
 
-message ImageRequest {
-  string id = 1;
+message GetImageDetailRequest {
+  string image_id = 1;
 }
 
-message ImageDetail {
-  string id = 1;
-  repeated FaceAnalysis faces = 2;
+message GetImageDetailResponse {
+  string image_id = 1; 
+  string image_url = 2;
 }
 
-message FaceAnalysis {
-  float joy = 1;
-  float sorrow = 2;
-  float anger = 3;
-  float surprise = 4;
-  // Add more fields as necessary
+message GetImageFeedRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
 }
 
-message ImageFeedRequest {
-  int32 page = 1;
-  int32 pageSize = 2;
+message GetImageFeedResponse {
+  repeated ImageDetails images = 1;
 }
 
-message ImageFeedResponse {
-  repeated ImageDetail images = 1;
+message ImageDetails {
+  string image_id = 1;
+  string image_url = 2;
 }
 
-service ImageManagementService {
-    rpc UploadImage (Image) returns (ImageResponse);
-    rpc GetImageDetail (ImageRequest) returns (ImageDetail);
-    rpc GetImageFeed (ImageFeedRequest) returns (ImageFeedResponse);
-    rpc UpdateImageDetail (ImageDetail) returns (ImageResponse);
-  }
-  
+message UpdateImageDetailRequest {
+  string image_id = 1;
+}
+
+message UpdateImageDetailResponse {
+  bool success = 1; 
+}
+
+service PhotoManagement {
+  rpc UploadImage(UploadImageRequest) returns (UploadImageResponse);
+  rpc GetImageDetail(GetImageDetailRequest) returns (GetImageDetailResponse);
+  rpc GetImageFeed(GetImageFeedRequest) returns (GetImageFeedResponse);
+  rpc UpdateImageDetail(UpdateImageDetailRequest) returns (UpdateImageDetailResponse);
+}
