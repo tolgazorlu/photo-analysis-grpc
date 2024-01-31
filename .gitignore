@@ -1,0 +1,46 @@
+## Go
+
+# Binaries for programs and plugins
+
+_.exe
+_.exe~
+_.dll
+_.so
+\*.dylib
+
+# Test binary, built with `go test -c`
+
+\*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+
+\*.out
+
+# Dependency directories (remove the comment below to include it)
+
+# vendor/
+
+# Go workspace file
+
+go.work
+
+## Protobuf
+
+\*.pb.go
+
+## SSL
+
+_.crt
+_.key
+_.csr
+_.pem
+
+## Mac
+
+.DS_Store
+
+## Other
+
+bin
+.vscode
+TODO.md
