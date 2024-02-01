@@ -22,7 +22,7 @@ func main() {
 	c := pb.NewPhotoManagementClient(conn)
 
 	// Read the image file
-	imageData, err := os.ReadFile("/Users/tolgazorlu/go/src/github.com/tolgazorlu/photo-analysis/tolgazorlu.jpg")
+	imageData, err := os.ReadFile("/Users/tolgazorlu/go/src/github.com/tolgazorlu/photo-analysis/cat.jpg")
 	if err != nil {
 		log.Fatalf("could not read file: %v", err)
 	}
