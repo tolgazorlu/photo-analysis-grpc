@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"io"
+	"log"
 
 	"fmt"
 
@@ -13,6 +14,8 @@ import (
 
 // detectFaces gets faces from the Vision API for an image at the given file path.
 func detectFaces(w io.Writer, file string) error {
+
+	log.Println("*** detectFaces was invoked! ***")
 	ctx := context.Background()
 
 	client, err := vision.NewImageAnnotatorClient(ctx)
@@ -21,7 +24,9 @@ func detectFaces(w io.Writer, file string) error {
 	}
 	defer client.Close()
 
-	f, err := os.Open(file)
+	newFile := "/Users/tolgazorlu/go/src/github.com/tolgazorlu/photo-analysis/photos/" + file
+
+	f, err := os.Open(newFile)
 	if err != nil {
 		return err
 	}
@@ -29,10 +34,12 @@ func detectFaces(w io.Writer, file string) error {
 
 	image, err := vision.NewImageFromReader(f)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 	annotations, err := client.DetectFaces(ctx, image, nil, 10)
 	if err != nil {
+		log.Println(err)
 		return err
 	}
 	if len(annotations) == 0 {

@@ -21,14 +21,26 @@ func serveFrames(imgByte []byte, imgName string) {
 
 	var opts jpeg.Options
 	opts.Quality = 99
-
-	writer := io.Writer(out)
-	detectFaces(writer, imgName)
-
 	err = jpeg.Encode(out, img, &opts)
-	//jpeg.Encode(out, img, nil)
 	if err != nil {
 		log.Println(err)
+	}
+
+	// Since the image file is now written, we can call detectFaces
+	// You need to reset the file pointer to the beginning of the file before reading it again
+	_, err = out.Seek(0, io.SeekStart) // Reset the file pointer to the start
+	if err != nil {
+		log.Fatalln("Error seeking file:", err)
+	}
+
+	// Prepare a writer for detectFaces to output results, if needed
+	// This could be the os.Stdout or any other writer where you want to output face detection results
+	writer := io.Writer(os.Stdout) // Example: Change as needed
+
+	// Now call detectFaces with the file name
+	err = detectFaces(writer, imgName)
+	if err != nil {
+		log.Println("Error detecting faces:", err)
 	}
 
 }
