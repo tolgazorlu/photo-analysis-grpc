@@ -6,47 +6,13 @@ option go_package = "github.com/tolgazorlu/photo-analysis/proto";
 
 
 message UploadImageRequest {
-  bytes image = 1;
+  bytes image_data = 1;
+  string filename = 2;
 }
 
 message UploadImageResponse {
   string image_id = 1;
 }
-
-message GetImageDetailRequest {
-  string image_id = 1;
-}
-
-message GetImageDetailResponse {
-  string image_id = 1; 
-  string image_url = 2;
-}
-
-message GetImageFeedRequest {
-  int32 page_number = 1;
-  int32 page_size = 2;
-}
-
-message GetImageFeedResponse {
-  repeated ImageDetails images = 1;
-}
-
-message ImageDetails {
-  string image_id = 1;
-  string image_url = 2;
-}
-
-message UpdateImageDetailRequest {
-  string image_id = 1;
-}
-
-message UpdateImageDetailResponse {
-  bool success = 1; 
-}
-
 service PhotoManagement {
   rpc UploadImage(UploadImageRequest) returns (UploadImageResponse);
-  rpc GetImageDetail(GetImageDetailRequest) returns (GetImageDetailResponse);
-  rpc GetImageFeed(GetImageFeedRequest) returns (GetImageFeedResponse);
-  rpc UpdateImageDetail(UpdateImageDetailRequest) returns (UpdateImageDetailResponse);
 }
