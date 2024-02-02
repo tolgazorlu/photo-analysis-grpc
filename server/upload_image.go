@@ -24,7 +24,7 @@ func (s *Server) UploadImage(ctx context.Context, in *pb.UploadImageRequest) (*p
 	}
 
 	return &pb.UploadImageResponse{
-		ImageId: "13212312873912",
+		ImageId: "0",
 	}, nil
 
 }

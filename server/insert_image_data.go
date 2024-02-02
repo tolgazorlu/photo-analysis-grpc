@@ -12,10 +12,9 @@ func insertImageData(DB *sql.DB, imageName string, imageData []byte, analysisRes
         VALUES ($1, $2, $3)
         RETURNING id`
 	var id int
-	err := DB.QueryRow(query, imageName, imageData, analysisResult).Scan(&id)
+	err := DB.QueryRow(query, imageName, imageData, analysisResult)
 	if err != nil {
 		log.Printf("Failed to insert image data: %v", err)
-		return err
 	}
 
 	fmt.Printf("Inserted image data with ID: %d\n", id)

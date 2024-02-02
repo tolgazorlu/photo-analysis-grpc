@@ -17,6 +17,7 @@ type Server struct {
 func main() {
 
 	connectToDB()
+	defer DB.Close()
 
 	lis, err := net.Listen("tcp", addr)
 

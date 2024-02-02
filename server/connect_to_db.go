@@ -19,11 +19,10 @@ var DB *sql.DB
 func connectToDB() {
 
 	var err error
-	DB, err := sql.Open("postgres", "user=root sslmode=disable password=secret host=localhost")
+	DB, err = sql.Open("postgres", "user=root sslmode=disable password=secret host=localhost")
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer DB.Close()
 
 	if err := DB.Ping(); err != nil {
 		log.Fatal(err)
