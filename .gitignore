@@ -36,4 +36,4 @@ bin
 .vscode
 TODO.md
 
-*.image.jpg
+/photos/*
