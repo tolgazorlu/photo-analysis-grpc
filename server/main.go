@@ -16,6 +16,8 @@ type Server struct {
 
 func main() {
 
+	connectToDB()
+
 	lis, err := net.Listen("tcp", addr)
 
 	if err != nil {

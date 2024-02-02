@@ -7,12 +7,14 @@ option go_package = "github.com/tolgazorlu/photo-analysis/proto";
 
 message UploadImageRequest {
   bytes image_data = 1;
-  string filename = 2;
+  string image_name = 2;
+  string image_analysis = 3;
 }
 
 message UploadImageResponse {
   string image_id = 1;
 }
+
 service PhotoManagement {
   rpc UploadImage(UploadImageRequest) returns (UploadImageResponse);
 }

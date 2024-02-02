@@ -22,7 +22,7 @@ func main() {
 	c := pb.NewPhotoManagementClient(conn)
 
 	// Read the image file
-	imageData, err := os.ReadFile("/Users/tolgazorlu/go/src/github.com/tolgazorlu/photo-analysis/cat.jpg")
+	imageData, err := os.ReadFile("/Users/tolgazorlu/go/src/github.com/tolgazorlu/photo-analysis/bigbang.jpg")
 	if err != nil {
 		log.Fatalf("could not read file: %v", err)
 	}
@@ -30,7 +30,7 @@ func main() {
 	// Upload the image
 	res, err := c.UploadImage(context.Background(), &pb.UploadImageRequest{
 		ImageData: imageData,
-		Filename:  "image.jpg",
+		ImageName: "bigbang.jpg",
 	})
 	if err != nil {
 		log.Fatalf("could not upload image: %v", err)

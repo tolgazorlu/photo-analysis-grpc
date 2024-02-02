@@ -33,14 +33,4 @@ func serveFrames(imgByte []byte, imgName string) {
 		log.Fatalln("Error seeking file:", err)
 	}
 
-	// Prepare a writer for detectFaces to output results, if needed
-	// This could be the os.Stdout or any other writer where you want to output face detection results
-	writer := io.Writer(os.Stdout) // Example: Change as needed
-
-	// Now call detectFaces with the file name
-	err = detectFaces(writer, imgName)
-	if err != nil {
-		log.Println("Error detecting faces:", err)
-	}
-
 }

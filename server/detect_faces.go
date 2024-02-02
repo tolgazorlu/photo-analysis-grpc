@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"io"
 	"log"
 
@@ -13,7 +14,7 @@ import (
 )
 
 // detectFaces gets faces from the Vision API for an image at the given file path.
-func detectFaces(w io.Writer, file string) error {
+func detectFaces(w io.Writer, file string, image_data []byte) error {
 
 	log.Println("*** detectFaces was invoked! ***")
 	ctx := context.Background()
@@ -42,6 +43,24 @@ func detectFaces(w io.Writer, file string) error {
 		log.Println(err)
 		return err
 	}
+
+	// // Serialize the annotations to JSON
+	annotationsJSON, err := json.Marshal(annotations)
+	if err != nil {
+		log.Printf("Error serializing annotations: %v", err)
+		return err // Handle serialization errors appropriately
+	}
+	annotationsStr := string(annotationsJSON)
+
+	// log.Println(annotationsStr)
+	// log.Println(image_data)
+
+	// Now, you can call insertImageData with the JSON string
+	err = insertImageData(DB, file, image_data, annotationsStr)
+	if err != nil {
+		log.Fatalln("Error inserting image data")
+	}
+
 	if len(annotations) == 0 {
 		fmt.Fprintln(w, "No faces found.")
 	} else {
