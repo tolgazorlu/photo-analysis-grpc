@@ -22,7 +22,7 @@ func (s *Server) UpdateImage(ctx context.Context, req *pb.UpdateImageRequest) (*
     SET image_name = $2, image_data = $3, image_analysis = $4
     WHERE image_id = $1;`
 
-	_, err := DB.Exec(sqlStatement, req.GetImageId(), req.GetImageData(), req.GetImageName(), req.GetImageAnalysis())
+	_, err := DB.Exec(sqlStatement, req.GetImageId(), req.GetImageName(), req.GetImageData(), req.GetImageAnalysis())
 	if err != nil {
 		log.Printf("Failed to update image: %v", err)
 		return nil, fmt.Errorf("failed to update image: %w", err)
