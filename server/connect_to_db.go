@@ -32,10 +32,10 @@ func connectToDB() {
 
 	sqlStatement := `
     CREATE TABLE IF NOT EXISTS images (
-		id SERIAL PRIMARY KEY,
-		image_name TEXT NOT NULL,
-		image_data BYTEA NOT NULL,
-		analysis_data JSONB, -- Assuming analysis data is stored as JSON
+		image_id SERIAL PRIMARY KEY,
+		image_data BYTEA,
+		image_name TEXT,
+		image_analysis TEXT,
 		created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 	);`
 

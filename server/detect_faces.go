@@ -45,15 +45,32 @@ func detectFaces(w io.Writer, file string, image_data []byte) error {
 	}
 
 	// // Serialize the annotations to JSON
-	annotationsJSON, err := json.Marshal(annotations)
+
+	// log.Println(annotationsStr)
+	// log.Println(image_data)
+
+	var analysis []string
+
+	if len(annotations) == 0 {
+		fmt.Fprintln(w, "No faces found.")
+	} else {
+		fmt.Fprintln(w, "Faces:")
+		for i, annotation := range annotations {
+			analysis = append(analysis, (fmt.Sprint(i) + ": { Anger: " + annotation.AngerLikelihood.String() + " Joy: " + annotation.JoyLikelihood.String() + " Surprise: " + annotation.SurpriseLikelihood.String() + "}"))
+			fmt.Print(analysis)
+			fmt.Fprintln(w, "  Face", i)
+			fmt.Fprintln(w, "    Anger:", annotation.AngerLikelihood)
+			fmt.Fprintln(w, "    Joy:", annotation.JoyLikelihood)
+			fmt.Fprintln(w, "    Surprise:", annotation.SurpriseLikelihood)
+		}
+	}
+
+	annotationsJSON, err := json.Marshal(analysis)
 	if err != nil {
 		log.Printf("Error serializing annotations: %v", err)
 		return err // Handle serialization errors appropriately
 	}
 	annotationsStr := string(annotationsJSON)
-
-	// log.Println(annotationsStr)
-	// log.Println(image_data)
 
 	// Now, you can call insertImageData with the JSON string
 	err = insertImageData(DB, file, image_data, annotationsStr)
@@ -61,16 +78,5 @@ func detectFaces(w io.Writer, file string, image_data []byte) error {
 		log.Fatalln("Error inserting image data")
 	}
 
-	if len(annotations) == 0 {
-		fmt.Fprintln(w, "No faces found.")
-	} else {
-		fmt.Fprintln(w, "Faces:")
-		for i, annotation := range annotations {
-			fmt.Fprintln(w, "  Face", i)
-			fmt.Fprintln(w, "    Anger:", annotation.AngerLikelihood)
-			fmt.Fprintln(w, "    Joy:", annotation.JoyLikelihood)
-			fmt.Fprintln(w, "    Surprise:", annotation.SurpriseLikelihood)
-		}
-	}
 	return nil
 }

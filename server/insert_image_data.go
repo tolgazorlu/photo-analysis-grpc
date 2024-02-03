@@ -7,10 +7,11 @@ import (
 )
 
 func insertImageData(DB *sql.DB, imageName string, imageData []byte, analysisResult string) error {
+
 	query := `
-        INSERT INTO images (image_name, image_data, analysis_data)
+        INSERT INTO images (image_name, image_data, image_analysis)
         VALUES ($1, $2, $3)
-        RETURNING id`
+        RETURNING image_id`
 	var id int
 	err := DB.QueryRow(query, imageName, imageData, analysisResult)
 	if err != nil {

@@ -15,6 +15,18 @@ message UploadImageResponse {
   string image_id = 1;
 }
 
+message UpdateImageRequest {
+  string image_id = 1;
+  bytes image_data = 2;
+  string image_name = 3;
+  string image_analysis = 4;
+}
+
+message UpdateImageResponse {
+  bool success = 1;
+}
+
 service PhotoManagement {
   rpc UploadImage(UploadImageRequest) returns (UploadImageResponse);
+  rpc UpdateImage(UpdateImageRequest) returns (UpdateImageResponse);
 }
