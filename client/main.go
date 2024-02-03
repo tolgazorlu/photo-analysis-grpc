@@ -25,8 +25,9 @@ func main() {
 	fmt.Println("Welcome to Photo Management System")
 	fmt.Println("----------------------------------")
 	fmt.Println("Choose what you want to do:")
-	fmt.Println("A. Upload new image")
-	fmt.Println("B. Update exist image")
+	fmt.Println("A. Upload A New Image")
+	fmt.Println("B. Update Exist Image")
+	fmt.Println("C. Get Image Detail")
 
 	reader := bufio.NewReader(os.Stdin)
 	choose, _, err := reader.ReadRune()
@@ -41,6 +42,8 @@ func main() {
 		uploadImage(c)
 	case 'B':
 		updateImage(c)
+	case 'C':
+		getImageDetail(c)
 	}
 
 }

@@ -26,7 +26,17 @@ message UpdateImageResponse {
   bool success = 1;
 }
 
+message ImageDetailRequest {
+  string image_id = 1;
+}
+
+message ImageDetailResponse {
+  string image_id = 1;
+  string image_analysis = 2;
+}
+
 service PhotoManagement {
   rpc UploadImage(UploadImageRequest) returns (UploadImageResponse);
   rpc UpdateImage(UpdateImageRequest) returns (UpdateImageResponse);
+  rpc GetImageDetail(ImageDetailRequest) returns (ImageDetailResponse);
 }
