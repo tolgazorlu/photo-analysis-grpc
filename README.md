@@ -64,5 +64,18 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    cd photo-analysis
    ```
+3. Build files
+   ```sh
+   make build
+   ```
+4. Open two terminal and write below codes.
+
+   ```sh
+    ./bin/server
+   ```
+
+   ```sh
+   ./bin/client
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
