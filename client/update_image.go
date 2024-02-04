@@ -10,12 +10,11 @@ import (
 
 func updateImage(c pb.PhotoManagementClient) {
 
-	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	// Assume this is an existing image ID in your database
+
 	image_id := "1"
-	image_data := []byte("...") // Your image data here
+	image_data := []byte("...")
 	image_name := "image_name_new.jpg"
 	image_analysis := "new analysis data"
 

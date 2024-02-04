@@ -12,7 +12,7 @@ import (
 )
 
 func (s *Server) UpdateImage(ctx context.Context, req *pb.UpdateImageRequest) (*pb.UpdateImageResponse, error) {
-	// Validate request
+
 	if req.GetImageId() == "" {
 		return nil, status.Errorf(codes.InvalidArgument, "Image ID is required")
 	}

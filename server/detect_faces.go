@@ -13,7 +13,6 @@ import (
 	vision "cloud.google.com/go/vision/apiv1"
 )
 
-// detectFaces gets faces from the Vision API for an image at the given file path.
 func detectFaces(w io.Writer, file string, image_data []byte) error {
 
 	log.Println("*** detectFaces was invoked! ***")
@@ -44,11 +43,6 @@ func detectFaces(w io.Writer, file string, image_data []byte) error {
 		return err
 	}
 
-	// // Serialize the annotations to JSON
-
-	// log.Println(annotationsStr)
-	// log.Println(image_data)
-
 	var analysis []string
 	var joy float32
 	var sorrow float32
@@ -66,21 +60,16 @@ func detectFaces(w io.Writer, file string, image_data []byte) error {
 			anger = float32(annotation.AngerLikelihood)
 			surprise = float32(annotation.SurpriseLikelihood)
 			fmt.Print(analysis)
-			fmt.Fprintln(w, "  Face", i)
-			fmt.Fprintln(w, "    Anger:", annotation.AngerLikelihood)
-			fmt.Fprintln(w, "    Joy:", annotation.JoyLikelihood)
-			fmt.Fprintln(w, "    Surprise:", annotation.SurpriseLikelihood)
 		}
 	}
 
 	annotationsJSON, err := json.Marshal(analysis)
 	if err != nil {
 		log.Printf("Error serializing annotations: %v", err)
-		return err // Handle serialization errors appropriately
+		return err
 	}
 	annotationsStr := string(annotationsJSON)
 
-	// Now, you can call insertImageData with the JSON string
 	err = insertImageData(DB, file, image_data, annotationsStr, joy, sorrow, anger, surprise)
 	if err != nil {
 		log.Fatalln("Error inserting image data")

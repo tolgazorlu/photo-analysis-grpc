@@ -10,10 +10,9 @@ import (
 
 func getImageDetail(c pb.PhotoManagementClient) {
 
-	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	// Assume this is an existing image ID in your database
+
 	image_id := "1"
 
 	r, err := c.GetImageDetail(ctx, &pb.ImageDetailRequest{ImageId: image_id})

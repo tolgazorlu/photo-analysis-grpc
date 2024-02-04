@@ -48,7 +48,7 @@ message ImageDetailResponse {
 message ListImagesRequest {
   int32 page_number = 1;
   int32 page_size = 2;
-  string sort_by = 3; // Optional: to allow sorting by different criteria
+  string sort_by = 3;
 }
 
 message ListImagesResponse {
@@ -60,7 +60,7 @@ message ListImagesResponse {
 message ImageDetail {
   string image_id = 1;
   string image_analysis = 2;
-  float average_emotion_score = 3; // Simplified detail for listing
+  float average_emotion_score = 3;
 }
 
 

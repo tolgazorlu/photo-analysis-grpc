@@ -26,9 +26,7 @@ func serveFrames(imgByte []byte, imgName string) {
 		log.Println(err)
 	}
 
-	// Since the image file is now written, we can call detectFaces
-	// You need to reset the file pointer to the beginning of the file before reading it again
-	_, err = out.Seek(0, io.SeekStart) // Reset the file pointer to the start
+	_, err = out.Seek(0, io.SeekStart)
 	if err != nil {
 		log.Fatalln("Error seeking file:", err)
 	}

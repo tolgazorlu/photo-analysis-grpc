@@ -43,7 +43,6 @@ func connectToDB() {
 		created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 	);`
 
-	// Execute SQL statement
 	_, err = DB.Exec(sqlStatement)
 	if err != nil {
 		panic(err)

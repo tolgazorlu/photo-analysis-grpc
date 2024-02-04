@@ -13,11 +13,8 @@ func (s *Server) UploadImage(ctx context.Context, in *pb.UploadImageRequest) (*p
 
 	serveFrames(in.ImageData, in.ImageName)
 
-	// Prepare a writer for detectFaces to output results, if needed
-	// This could be the os.Stdout or any other writer where you want to output face detection results
-	writer := io.Writer(os.Stdout) // Example: Change as needed
+	writer := io.Writer(os.Stdout)
 
-	// Now call detectFaces with the file name
 	err := detectFaces(writer, in.ImageName, in.ImageData)
 	if err != nil {
 		log.Println("Error detecting faces:", err)
