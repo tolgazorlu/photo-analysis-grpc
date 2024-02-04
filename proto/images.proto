@@ -9,6 +9,10 @@ message UploadImageRequest {
   bytes image_data = 1;
   string image_name = 2;
   string image_analysis = 3;
+  float joy = 4;
+  float sorrow = 5;
+  float anger = 6;
+  float surprise = 7;
 }
 
 message UploadImageResponse {
@@ -33,6 +37,10 @@ message ImageDetailRequest {
 message ImageDetailResponse {
   string image_id = 1;
   string image_analysis = 2;
+  float joy = 3;
+  float sorrow = 4;
+  float anger = 5;
+  float surprise = 6;
 }
 
 service PhotoManagement {

@@ -50,6 +50,10 @@ func detectFaces(w io.Writer, file string, image_data []byte) error {
 	// log.Println(image_data)
 
 	var analysis []string
+	var joy float32
+	var sorrow float32
+	var anger float32
+	var surprise float32
 
 	if len(annotations) == 0 {
 		fmt.Fprintln(w, "No faces found.")
@@ -57,6 +61,10 @@ func detectFaces(w io.Writer, file string, image_data []byte) error {
 		fmt.Fprintln(w, "Faces:")
 		for i, annotation := range annotations {
 			analysis = append(analysis, (fmt.Sprint(i) + ": { Anger: " + annotation.AngerLikelihood.String() + " Joy: " + annotation.JoyLikelihood.String() + " Surprise: " + annotation.SurpriseLikelihood.String() + "}"))
+			joy = float32(annotation.JoyLikelihood)
+			sorrow = float32(annotation.SorrowLikelihood)
+			anger = float32(annotation.AngerLikelihood)
+			surprise = float32(annotation.SurpriseLikelihood)
 			fmt.Print(analysis)
 			fmt.Fprintln(w, "  Face", i)
 			fmt.Fprintln(w, "    Anger:", annotation.AngerLikelihood)
@@ -73,7 +81,7 @@ func detectFaces(w io.Writer, file string, image_data []byte) error {
 	annotationsStr := string(annotationsJSON)
 
 	// Now, you can call insertImageData with the JSON string
-	err = insertImageData(DB, file, image_data, annotationsStr)
+	err = insertImageData(DB, file, image_data, annotationsStr, joy, sorrow, anger, surprise)
 	if err != nil {
 		log.Fatalln("Error inserting image data")
 	}

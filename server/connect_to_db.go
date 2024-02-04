@@ -36,6 +36,10 @@ func connectToDB() {
 		image_data BYTEA,
 		image_name TEXT,
 		image_analysis TEXT,
+		joy FLOAT,
+		sorrow FLOAT,
+		anger FLOAT,
+		surprise FLOAT,
 		created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 	);`
 
