@@ -8,7 +8,7 @@ import (
 	pb "github.com/tolgazorlu/photo-analysis/proto"
 )
 
-func (s *Server) ListImages(ctx context.Context, in *pb.ListImagesRequest) (*pb.ListImagesResponse, error) {
+func (s *Server) GetImageFeed(ctx context.Context, in *pb.ListImagesRequest) (*pb.ListImagesResponse, error) {
 	query := `SELECT image_id, image_analysis, (joy + sorrow + anger + surprise) / 4.0 AS average_emotion_score FROM images`
 
 	sortBy := "average_emotion_score DESC"
