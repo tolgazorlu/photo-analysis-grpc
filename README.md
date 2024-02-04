@@ -26,8 +26,8 @@
 
 ## Technology Stack
 
-- <strong>Docker:</strong> Container
-- <strong>Postgres16</strong> Database
+- <strong>Docker:</strong> Container (postgres:16.1-alpine)
+- <strong>Postgres16</strong> Database (postgres:16.1-alpine)
 - <strong>Go</strong> Scability and Fast Backend
 - <strong>gRPC</strong> Remote Procedure Call
 - <strong>Protobuf: </strong> Structered Data
