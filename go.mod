@@ -4,6 +4,7 @@ go 1.21.4
 
 require (
 	cloud.google.com/go/vision v1.2.0
+	github.com/confluentinc/confluent-kafka-go v1.9.2
 	github.com/lib/pq v1.10.9
 	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.32.0

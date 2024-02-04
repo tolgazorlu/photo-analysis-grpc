@@ -14,7 +14,7 @@ func getImageDetail(c pb.PhotoManagementClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	// Assume this is an existing image ID in your database
-	image_id := "2"
+	image_id := "1"
 
 	r, err := c.GetImageDetail(ctx, &pb.ImageDetailRequest{ImageId: image_id})
 	if err != nil {
