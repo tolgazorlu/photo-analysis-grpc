@@ -28,7 +28,9 @@ func main() {
 	fmt.Println("A. Upload A New Image")
 	fmt.Println("B. Update Exist Image")
 	fmt.Println("C. Get Image Detail")
+	fmt.Println("D. Get Image Feed")
 
+	fmt.Print("Select: ")
 	reader := bufio.NewReader(os.Stdin)
 	choose, _, err := reader.ReadRune()
 	if err != nil {
@@ -44,6 +46,8 @@ func main() {
 		updateImage(c)
 	case 'C':
 		getImageDetail(c)
+	case 'D':
+		getImageFeed(c)
 	}
 
 }
