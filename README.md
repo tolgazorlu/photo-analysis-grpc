@@ -10,6 +10,10 @@
 
 <!-- Features -->
 
+## About
+
+A gRPC backend that stores photos in Postgres and runs face/emotion detection on them with the Google Cloud Vision API, with image analysis queued through Kafka. Built January-February 2024.
+
 ## Features
 
 - <strong>FACE DETECTION</strong>
@@ -40,42 +44,52 @@
 
 ## Getting Started
 
-This is an backend example
+This is a gRPC backend (server + client) for photo upload and face analysis.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- go
-  ```link
-  https://go.dev/doc/install
-  ```
+- [Go](https://go.dev/doc/install)
+- A running Postgres instance (the server connects on `localhost`)
+- `protoc` with the Go and Go-gRPC plugins, to regenerate `proto/*.pb.go` via `make protoc`
+- Google Cloud Vision API credentials (`GOOGLE_APPLICATION_CREDENTIALS`) for face detection
+- A running Kafka broker if async detection is enabled (`getting-started.properties`)
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This project doesn't rely on any external dependencies or services._
 
 1. Clone the repo
    ```sh
    git clone https://github.com/tolgazorlu/photo-analysis-grpc
    ```
-2. Install enter a file
+2. Enter the project directory
    ```sh
-   cd photo-analysis
+   cd photo-analysis-grpc
    ```
-3. Build files
+3. Build the server and client binaries
    ```sh
    make build
    ```
-4. Open two terminal and write below codes.
-
+4. Run the server and client in separate terminals
    ```sh
-    ./bin/server
+   ./bin/server
    ```
-
    ```sh
    ./bin/client
    ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Architecture
+
+```
+proto/images.proto   # gRPC service and message definitions
+server/               # gRPC server: DB, Vision API face detection, Kafka
+client/               # gRPC client calling upload/update/get endpoints
+Makefile              # protoc generation and build targets
+```
+
+## Status
+
+Learning/experiment project, not actively maintained.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
