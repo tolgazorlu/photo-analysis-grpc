@@ -37,3 +37,6 @@ bin
 TODO.md
 
 photos/*
+## Env
+.env
+.env.local
